@@ -26,15 +26,27 @@ subfolder_lkr=
 [FILE_SUBFOLDERS]
 file_000=.
 file_001=.
+file_002=.
+file_003=.
+file_004=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
+file_002=no
+file_003=no
+file_004=no
 [OTHER_FILES]
 file_000=no
 file_001=no
+file_002=no
+file_003=no
+file_004=no
 [FILE_INFO]
 file_000=alarmeResidencial.c
-file_001=C:\Program Files (x86)\Microchip\mplabc18\v3.47\bin\LKR\18f4520_g.lkr
+file_001=uart.c
+file_002=pwm.h
+file_003=uart.h
+file_004=C:\Program Files (x86)\Microchip\mplabc18\v3.47\bin\LKR\18f4520_g.lkr
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 suite_state=
