@@ -1,4 +1,4 @@
-//#include <xc.h>
+#include <xc.h>
 #include "uart.h"
 #include "pwm.h"
 #include <string.h>
@@ -13,11 +13,12 @@
 
 char last_zona1=0,last_zona2=0,last_zona3=0,last_zona4=0;
 char direcao=1;
+char comando[30];
 unsigned long contador_tempo=0;
 unsigned long contador_alarme=0;
 int armado=0,duty=0;
-char comando[30];
 int i=0;
+
 
 void ativa_alarme_sonoro();
 void configura_alarme_sonoro();
@@ -28,7 +29,9 @@ void envia_log(int zona);
 void loop();
 void setup();
 unsigned long tempo_corrente();
-void set_tempo_corrente();
+void set_tempo_corrente(unsigned long tempo_corrente);
+
+
 void __interrupt(high_priority) isr_uart_rx()
 {
     if(PIR1bits.RCIF)
@@ -81,6 +84,8 @@ void __interrupt(high_priority) isr_uart_rx()
         }
     }
 }
+
+
 void __interrupt(low_priority) isr_low_priority()
 {
     if(INTCONbits.TMR0IF)
@@ -96,7 +101,7 @@ void __interrupt(low_priority) isr_low_priority()
     {
         PIR2bits.TMR3IF=0;
         contador_alarme++;
-        if(contador_alarme>=100)//quase 5 segundos
+        if(contador_alarme>=100)	//5 segundos
             desativa_alarme_sonoro();
     }
     if(PIR1bits.TMR2IF)
@@ -143,11 +148,11 @@ void setup()
     configura_relogio();
     TRISB=0b11111111;
     ADCON1=0x0F;
-    //interrup��o porta b
+
     INTCONbits.RBIE=1;
     INTCON2bits.RBIP=0;
     INTCONbits.RBIF=0;
-    //fim interrup��o porta b
+    
     INTCONbits.GIE=1;
     INTCONbits.PEIE=1;
     RCONbits.IPEN=1;
